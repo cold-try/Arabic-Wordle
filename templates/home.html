@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html translate="no">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        {% load pwa %}
+        {% progressive_web_app_meta %}
+        <title>Kalimatun - Arabic Wordle</title>
+        <meta id="descrip" name="description" content="arabic wordle">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static '/favicon/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favicon/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static '/favicon/site.webmanifest' %}">
+        <link href="{% static '/css/style.css' %}" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/5056aa2026.js" crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <div id="modal-backdrop" class="show"></div>
+        <header class="header">
+            <div class='actions-bar'>
+                <i id="help-modal" class="fa-solid fa-circle-question action-icon"></i>
+            </div>
+
+            <div>
+                <h1 class="logo">كلمة ; <span class="french-logo">Kalimatun</span></h1>
+            </div>
+
+            <div class='actions-bar'>
+                <a href="https://twitter.com/MuslimNetworkV2" style="color:rgb(29, 155, 240);"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/muslimnetwork.official/?hl=fr" style="color:#405DE6;"><i class="fab fa-instagram"></i></a>
+            </div>
+        </header>
+
+        <div id="box" class="fixed">
+            <div>
+                <p>! الكلمة ليست في القائمة <i class="far fa-flag"></i></p>
+                <hr>
+                <p><i class="far fa-flag"></i> Ce mot n'est pas dans la liste !</p>
+            </div>
+        </div>
+
+        <div id="finish" class="basic off">
+            <div>
+                <p>! أحسنت لقد وجدت الكلمة المخفية <i class="fas fa-trophy mn-icon"></i></p>
+                <p><i class="fas fa-trophy mn-icon"></i> Bravo vous avez trouvé le mot caché !</p>
+                <div style="display:flex">
+                    <p><i class="fas fa-cubes mn-icon"></i> Mot caché : <span id="mot-cache"></span></p>
+                    <p style="margin-left:3%">-</p>
+                    <p style="margin-left:3%">Score : 100%</p>
+                </div>
+                <hr>
+                <p>ابحث عن كلمة جديدة كل يوم (ستتوفر كلمة جديدة اعتبارًا من منتصف الليل)</p>
+                <p><i class="fas fa-hourglass-half mn-icon"></i> Trouvez un nouveau mot chaque jour (un nouveau mot sera disponible à partir de minuit).</p>
+                <hr>
+                <div class="networks">
+                    <p>Suivez Muslim Network sur les réseaux sociaux : </p>
+                    <div class="netlinks">
+                        <a href="https://www.instagram.com/muslimnetwork.official/?hl=fr" style="color:#405DE6;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/MuslimNetworkV2" style="color:rgb(29, 155, 240);"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loose" class="basic off">
+            <div>
+                <p>! لقد خسرت <i class="fas fa-thumbs-down mn-icon"></i></p>
+                <p><i class="fas fa-thumbs-down mn-icon"></i> Vous avez perdu !</p>
+                <p><i class="fas fa-cubes mn-icon"></i> Score : <span id="score"></span>%</p>
+                <hr>
+                <p>ابحث عن كلمة جديدة كل يوم (ستتوفر كلمة جديدة اعتبارًا من منتصف الليل)</p>
+                <p><i class="fas fa-hourglass-half mn-icon"></i> Trouvez un nouveau mot chaque jour (un nouveau mot sera disponible à partir de minuit).</p>
+                <hr>
+                <div class="networks">
+                    <p>Suivez Muslim Network sur les réseaux sociaux : </p>
+                    <div class="netlinks">
+                        <a href="https://www.instagram.com/muslimnetwork.official/?hl=fr" style="color:#405DE6;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/MuslimNetworkV2" style="color:rgb(29, 155, 240);"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="help" class="on">
+            <p class="title-action-bar"><i class="fa-solid fa-circle-question action-icon"></i> تفسير / Explications <i id="out-of-mod" class="far fa-times-circle"></i></p>
+            <div class="">
+                <hr class="noresp">
+                <div length="5">
+                    <div class='row'>
+                        <div class="case-ex" data-animation="idle"></div>
+                        <div class="case-ex" data-animation="idle"></div>
+                        <div class="case-ex empty" data-animation="idle"></div>
+                        <div class="case-ex" data-animation="idle"></div>
+                        <div class="case-ex" data-animation="idle"></div>
+                    </div>
+                </div>
+                <hr class="noresp">
+                <p>الحرف ليس في الجملة</p>
+                <p>La lettre n'est pas dans la phrase.</p>
+                <hr class="noresp">
+                <div length="5">
+                    <div class='row'>
+                        <div class="case-ex" data-animation="idle"></div>
+                        <div class="case-ex truebut" data-animation="idle"></div>
+                        <div class="case-ex" data-animation="idle"></div>
+                        <div class="case-ex" data-animation="idle"></div>
+                        <div class="case-ex" data-animation="idle"></div>
+                    </div>
+                </div>
+                <hr class="noresp">
+                <p>الحرف موجود في الجملة بل في مكان آخر</p>
+                <p>La lettre est dans la phrase mais n'est pas à sa place.</p>
+                <hr class="noresp">
+                <div length="5">
+                    <div class='row'>
+                        <div class="case-ex" data-animation="idle"></div>
+                        <div class="case-ex" data-animation="idle"></div>
+                        <div class="case-ex" data-animation="idle"></div>
+                        <div class="case-ex true" data-animation="idle"></div>
+                        <div class="case-ex" data-animation="idle"></div>
+                    </div>
+                </div>
+                <hr class="noresp">
+                <p>الحرف في مكانه</p>
+                <p>La lettre est à sa place.</p>
+            </div>
+        </div>
+
+        <div id="toile">
+            <div id="container">
+                <div id="grille">
+                    <div length="5">
+                        <div class='row'>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                        </div>
+                    </div>
+                    <div length="5">
+                        <div class='row'>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                        </div>
+                    </div>
+                    <div length="5">
+                        <div class='row'>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                        </div>
+                    </div>
+                    <div length="5">
+                        <div class='row'>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                        </div>
+                    </div>
+                    <div length="5">
+                        <div class='row'>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                        </div>
+                    </div>
+                    <div length="5">
+                        <div class='row'>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                            <div class="case"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+            <div id="keyboard">
+                <div class="row-keyboard">
+                    
+                </div>
+                <div class="row-keyboard">
+                    <button class="letter-target" data-key='ض'>ض</button>
+                    <button class="letter-target" data-key='ص'>ص</button>
+                    <button class="letter-target" data-key='ث'>ث</button>
+                    <button class="letter-target" data-key='ق'>ق</button>
+                    <button class="letter-target" data-key='ف'>ف</button>
+                    <button class="letter-target" data-key='غ'>غ</button>
+                    <button class="letter-target" data-key='ع'>ع</button>
+                    <button class="letter-target" data-key='ه'>ه</button>
+                    <button class="letter-target" data-key='خ'>خ</button>
+                    <button class="letter-target" data-key='ح'>ح</button>
+                    <button class="letter-target" data-key='ج'>ج</button>
+                    <button style="background-color:#3a3a3c" class="letter-target" data-key="←" class="one-and-a-half"><i data-key="←" class="fa-solid fa-delete-left"></i></button>
+                </div>
+                <div class="row-keyboard">
+                    <button class="letter-target" data-key='ش'>ش</button>
+                    <button class="letter-target" data-key='س'>س</button>
+                    <button class="letter-target" data-key='ي'>ي</button>
+                    <button class="letter-target" data-key='ب'>ب</button>
+                    <button class="letter-target" data-key='ل'>ل</button>
+                    <button class="letter-target" data-key='إ'>إ</button>
+                    <button class="letter-target" data-key='أ'>أ</button>
+                    <button class="letter-target" data-key='ا'>ا</button>
+                    <button class="letter-target" data-key='ت'>ت</button>
+                    <button class="letter-target" data-key='ن'>ن</button>
+                    <button class="letter-target" data-key='م'>م</button>
+                    <button class="letter-target" data-key='ك'>ك</button>
+                    <button class="letter-target" data-key='ط'>ط</button>
+                </div>
+                <div class="row-keyboard">
+                    <button id="submitLetters" data-key="↵" class="one-and-a-half true"><i class="fas fa-search"></i></button>
+                    <button class="letter-target" data-key='ر'>ر</button>
+                    <button class="letter-target" data-key='د'>د</button>
+                    <button class="letter-target" data-key='ذ'>ذ</button>
+                    <button class="letter-target" data-key='و'>و</button>
+                    <button class="letter-target" data-key='ز'>ز</button>
+                    <button class="letter-target" data-key='ظ'>ظ</button>
+                    <button class="letter-target" data-key='ة'>ة</button>
+                    <button class="letter-target" data-key='ء'>ء</button>
+                    <button class="letter-target" data-key='ئ'>ئ</button>
+                    <button class="letter-target" data-key='ؤ'>ؤ</button>
+                    <button class="letter-target" data-key='ى'>ى</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static '/js/core.js' %}"></script>
+    </body>
+</html>
