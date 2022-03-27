@@ -32,11 +32,11 @@ def is_in_list(word):
 def home(request):
     " CORE "
     today = datetime.today() + timedelta(hours=1)
-    currentDate = today.strftime("%m/%d/%y")
+    currentDate = today.strftime("%d/%m/%y")
 
     if request.method == 'POST':
         a,b,c = map(int, currentDate.split('/'))
-        key = abs(a-c)+b
+        key = (a+b+c) - 49
         solution = list(words(key).replace('\n', ''))
         word_test = request.POST.get('letters')
         score = []

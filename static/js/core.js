@@ -117,6 +117,7 @@ const openHelpModal = document.getElementById('help-modal')
 const closeHelpModal = document.getElementById('out-of-mod');
 const modalHelp = document.getElementById('help');
 const modalBackDrop = document.getElementById('modal-backdrop');
+var unlock = false;
 var result = '';
 var row = 1;
 
@@ -136,8 +137,9 @@ closeHelpModal.addEventListener("click", event => {
 
 submitButton.addEventListener("click", event => {
     event.preventDefault();
-    if (result.length == 5) {
+    if (result.length == 5 && unlock) {
         var limit = 5*row;
+        unlock = false;
         
         ajaxTestLetters(result, limit)
         .then((data) => {
@@ -158,5 +160,6 @@ for (var i = 0; i < letterTarget.length; i++) {
     letterTarget[i].addEventListener('click', event => {
         event.stopPropagation();
         result = completion(event.target.getAttribute("data-key"), result, row);
+        unlock = true;
     });
 }
