@@ -31,12 +31,12 @@ def is_in_list(word):
 @csrf_exempt
 def home(request):
     " CORE "
-    today = datetime.today() + timedelta(hours=1)
+    today = datetime.today() + timedelta(hours=2)
     currentDate = today.strftime("%d/%m/%y")
 
     if request.method == 'POST':
         a,b,c = map(int, currentDate.split('/'))
-        key = (a+b+c) - 49
+        key = a+c+(2*b)+30
         solution = list(words(key).replace('\n', ''))
         word_test = request.POST.get('letters')
         score = []
