@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html translate="no">
     <head>
         <meta charset="UTF-8">
@@ -14,6 +13,7 @@
         <link href="{% static '/css/style.css' %}" rel="stylesheet">
         <script src="https://kit.fontawesome.com/5056aa2026.js" crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script async defer data-website-id="c2bb6e10-241f-40c4-a805-75a382679ed8" src="https://umami-production-8a46.up.railway.app/umami.js"></script>
     </head>
 
     <body>
@@ -89,8 +89,8 @@
                 <p style="font-size:0.9em">الهدف : العثور على كلمة اليوم المخفية (5 أحرف) بحد 6 محاولات</p>
                 <p style="font-size:0.9em">L'objectif : Trouver le mot caché du jour (de 5 lettres) en 6 essais maximum.</p>
                 <hr class="noresp">
-                <div class="example" length="5">
-                    <div class='row row-example'>
+                <div length="5">
+                    <div class='row'>
                         <div class="case-ex" data-animation="idle"></div>
                         <div class="case-ex" data-animation="idle"></div>
                         <div class="case-ex empty" data-animation="idle"></div>
@@ -99,11 +99,11 @@
                     </div>
                 </div>
                 <hr class="noresp">
-                <p>الحرف ليس في الجملة</p>
+                <p>الحرف ليس في الكلمة</p>
                 <p>La lettre n'est pas dans le mot.</p>
                 <hr class="noresp">
-                <div class="example" length="5">
-                    <div class='row row-example'>
+                <div length="5">
+                    <div class='row'>
                         <div class="case-ex" data-animation="idle"></div>
                         <div class="case-ex truebut" data-animation="idle"></div>
                         <div class="case-ex" data-animation="idle"></div>
@@ -112,11 +112,11 @@
                     </div>
                 </div>
                 <hr class="noresp">
-                <p>الحرف موجود في الجملة بل في مكان آخر</p>
+                <p>الحرف موجود في الكلمة بل في مكان آخر</p>
                 <p>La lettre est dans le mot mais n'est pas à sa place.</p>
                 <hr class="noresp">
-                <div class="example" length="5">
-                    <div class='row row-example'>
+                <div length="5">
+                    <div class='row'>
                         <div class="case-ex" data-animation="idle"></div>
                         <div class="case-ex" data-animation="idle"></div>
                         <div class="case-ex" data-animation="idle"></div>
@@ -189,11 +189,11 @@
                     </div>
                 </div>
             </div>
-        
+
 
             <div id="keyboard">
                 <div class="row-keyboard">
-                    
+
                 </div>
                 <div class="row-keyboard">
                     <button class="letter-target" data-key='ض'>ض</button>
